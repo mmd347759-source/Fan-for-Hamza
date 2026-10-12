@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamza & Maisa - Love Story</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 20px;
+            animation: float 6s linear infinite;
+            bottom: -20px;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 30px 25px;
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            z-index: 10;
+        }
+
+        .avatar-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #ff4b2b;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            font-weight: bold;
+            box-shadow: 0 8px 16px rgba(255, 75, 43, 0.3);
+            border: 3px solid #fff;
+        }
+
+        .avatar.maisa {
+            background: #ff416c;
+        }
+
+        .heart-icon {
+            font-size: 30px;
+            color: #ff2a5f;
+            animation: pulse 1.2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .caption-card {
+            background: #fff;
+            padding: 18px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-left: 5px solid #ff416c;
+            text-align: left;
+        }
+
+        .caption-card p {
+            color: #444;
+            font-size: 15px;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(255, 65, 108, 0.4);
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2deg);
+            box-shadow: 0 8px 25px rgba(255, 65, 108, 0.6);
+        }
+
+        .music-player {
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 12px;
+        }
+
+        audio {
+            width: 100%;
+            height: 35px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="avatar-box">
+            <div class="avatar">H</div>
+            <div class="heart-icon">❤️</div>
+            <div class="avatar Maisa">M</div>
+        </div>
+
+        <h1>হামজা & মাইসা</h1>
+        <p class="subtitle">নিখাদ ভালোবাসা ও ফুলটাইম প্যারার এক অপূর্ব সমন্বয়! 😜</p>
+
+        <div class="caption-card">
+            <p><strong>🔥 আজকের স্পেশাল ক্যাপশন:</strong></p>
+            <p id="caption-text">"হামজা ভেবেছিল জীবনটা রিল্যাক্সের… তারপর জীবনে আগমন ঘটলো মাইসা নামের এক ফুলটাইম প্যারা ডিস্ট্রিবিউটারের! 🤣❤️"</p>
+        </div>
+
+        <button class="btn" onclick="changeCaption()">মজাদার ক্যাপশন বদলাও 🎲</button>
+
+        <!-- Ringtone / Music Player -->
+        <div class="music-player">
+            <p style="font-size: 12px; color: #555; margin-bottom: 5px;">🎵 প্লে করো রোমান্টিক রিংটোন</p>
+            <audio controls loop autoplay>
+                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                আপনার ব্রাউজার অডিও সাপোর্ট করে না।
+            </audio>
+        </div>
+    </div>
+
+    <script>
+        // Floating Hearts Generator
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+            heart.style.fontSize = Math.random() * 15 + 15 + 'px';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+        setInterval(createHeart, 400);
+
+        // Multiple Funny Captions
+        const captions = [
+            '"হামজা ভেবেছিল জীবনটা রিল্যাক্সের… তারপর জীবনে আগমন ঘটলো মাইসা নামের এক ফুলটাইম প্যারা ডিস্ট্রিবিউটারের! 🤣❤️"',
+            '"সিঙ্গেলদের কষ্টের দিন শেষ, কারণ হামজাকে সামলানোর দায়িত্ব এখন অফিসিয়ালি মাইসার হাতে! 🤲😜"',
+            '"হামজার লাইফে একটাই পারফেক্ট সিদ্ধান্ত—মাইসাকে নিজের জালে জড়ানো! (যদিও এখন নিজেই ধরা খেয়ে বসে আছে) 😝❤️"',
+            '"হামজার মনের রাজ্যের একচ্ছত্র রানী: মাইসা! 👑❤️"',
+            '"মাইসার এক হাসিতেই আমাদের হামজা ভাই কাইত! 🤪💘"'
+        ];
+
+        let index = 0;
+        function changeCaption() {
+            index = (index + 1) % captions.length;
+            document.getElementById('caption-text').innerText = captions[index];
+        }
+    </script>
+</body>
+                                                                         </html>
+                                                                         
